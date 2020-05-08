@@ -31,4 +31,46 @@ public class EulerUtils {
             }
         }
     }
+
+    // Get largest number which, multiplied by a smaller number and then reversed, equals the same number
+    public static int getLargestPalindrome(int number) {
+        for(int i = number; i >= 0; i--) {
+            if(number * i == reverseNumber(number * i)) {
+                return i;
+            }
+        }
+        // No number found
+        return 0;
+    }
+
+    // Reserve number by digits
+    private static int reverseNumber(int number) {
+        StringBuilder reverse = new StringBuilder();
+        String sNumber = String.valueOf(number);
+        for(int i = sNumber.length() - 1; i >= 0; i--) {
+            reverse.append(sNumber.charAt(i));
+        }
+        return Integer.parseInt(reverse.toString());
+    }
+
+    // Is value divisible by all number from 1 to divider
+    public static boolean isDivisible(int value, int divider) {
+        boolean divisible = true;
+        for (int i = 1; i <= divider; i++) {
+            if (!(value % i == 0)) {
+                divisible = false;
+                break;
+            }
+        }
+        return divisible;
+    }
+
+    // Get the product of all distinct digits of String s
+    public static BigInteger getProduct(String s) {
+        BigInteger product = BigInteger.valueOf(Long.parseLong(s.substring(0, 1)));
+        for (int i = 1; i < s.length(); i++) {
+            product = product.multiply(BigInteger.valueOf(Long.parseLong((s.substring(i, i + 1)))));
+        }
+        return product;
+    }
 }
